@@ -1,19 +1,14 @@
-# RPP Screening Bot (EAT-26 + SCOFF)
+@'
+# DEBQ-bot
 
-Телеграм-бот для анонимного скрининга нарушений пищевого поведения по шкалам **EAT-26** и **SCOFF**.
+Telegram-бот для опросника **DEBQ** (Nederlands Vragenlijst voor Eetgedrag).
+- Шкалы: Ограничительное (1–10), Эмоциональное (11–23), Экстернальное (24–33, п.31 обратный).
+- Ответы: 1=Никогда … 5=Очень часто. Подсчёт: среднее по каждой подшкале.
 
 ## Локальный запуск
-
-```bash
-python -m venv .venv
-source .venv/Scripts/activate   # Windows Git Bash
-# PowerShell: . .\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
+```powershell
+py -3 -m venv .venv
+.\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-
-# задайте токен (получите у @BotFather)
-export BOT_TOKEN=123456:ABC...   # PowerShell: $env:BOT_TOKEN="123:ABC..."
-
-python bot.py
-# rpp-bot
-# DEBQ-bot
+$env:BOT_TOKEN="ВАШ_ТОКЕН_ОТ_BOTFATHER"
+python DEBQ_bot.py
