@@ -12,3 +12,4 @@ py -3 -m venv .venv
 pip install -r requirements.txt
 $env:BOT_TOKEN="ВАШ_ТОКЕН_ОТ_BOTFATHER"
 python DEBQ_bot.py
+# DEBQ-bot
