@@ -138,6 +138,18 @@ def make_keyboard() -> InlineKeyboardMarkup:
     ]
     return InlineKeyboardMarkup(buttons)
 
+def build_answers_review(answers: Dict[int, int]) -> str:
+    """Возвращает текст со списком вопросов и ответов пользователя."""
+    # value -> label (1..5 -> 'Никогда'..'Очень часто')
+    value_to_label = {v: l for (l, v) in LIKERT_OPTIONS}
+
+    lines = ["📝 Ваши ответы:"]
+    for q in sorted(QUESTIONS, key=lambda x: x["id"]):
+        val = answers.get(q["id"])
+        label = value_to_label.get(val, "—")
+        lines.append(f"{q['id']}. {q['text']}\n   Ответ: {label}")
+    return "\n".join(lines)
+
 # ====== ОБРАБОТЧИКИ БОТА ======
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
