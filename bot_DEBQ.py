@@ -191,12 +191,17 @@ async def on_answer(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data["current_q"] = next_q
         await send_question(update, context, next_q)
     else:
-        # Все ответы получены
-        res = compute_results(answers)
-        text = results_text(res)
-        await query.edit_message_text(text=text, parse_mode="Markdown")
-        # Сброс состояния (при желании можно оставить ответы)
-        context.user_data.pop("current_q", None)
+       # Все ответы получены
+         res = compute_results(answers)
+         summary = results_text(res)
+         await query.edit_message_text(text=summary, parse_mode="Markdown")
+
+# Отправим отдельным сообщением перечень вопросов и ответов (без Markdown — безопаснее)
+         answers_text = build_answers_review(answers)
+         await query.message.reply_text(answers_text)
+
+# Сброс состояния
+context.user_data.pop("current_q", None)
 
 def main():
     token = os.getenv("BOT_TOKEN")
